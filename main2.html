@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition System</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+            height: 100%;
+            display: block;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 20px;
+            margin: 10px;
+            background-color: #fff;
+        }
+
+        .large-heading {
+            font-family: sans-serif;
+            font-size: 2.3rem;
+            margin-bottom: 40px;
+            background-color: #5D3FD3;
+            color: aliceblue;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            display: flex;
+            align-items: center;
+            padding-left: 205px;
+            position: relative;
+        }
+
+        .large-heading .icon {
+            position: absolute;
+            left: 155px;
+            font-size: 2rem;
+            color: aliceblue;
+            margin-right: 15px;
+        }
+
+        /*CSS FOR THE ACTIVE BUTTON*/
+        .active-centered-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* margin-top: 20px;  Adjust as needed for positioning */
+            height: 100%
+        }
+
+        .active-rounded-button {
+            background-color: #5D3FD3; /* Button color */
+            color: white; /* Text color */
+            padding: 15px 60px;
+            border-radius: 30px; /* Rounded corners */
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none; /* Make the button unclickable */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for depth */
+        }
+
+        /*CSS FOR THE MARKED BUTTON*/
+        .marked-centered-button {
+            display: flex;
+            flex-direction: column; /* Stack Icon And Button vertically */
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-content: center;
+            align-items: center;
+            /* margin-top: 20px;  Adjust as needed for positioning */
+            height: 100%
+        }
+
+        .marked-rounded-button {
+            background-color: #5D3FD3; /* Button color */
+            color: white; /* Text color */
+            padding: 15px 60px;
+            border-radius: 30px; /* Rounded corners */
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none; /* Make the button unclickable */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for depth */
+        }
+
+        /*CSS FOR THE ALREADY MARKED BUTTON*/
+        .already-marked-centered-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* margin-top: 20px;  Adjust as needed for positioning */
+            height: 100%
+        }
+
+        .already-marked-rounded-button {
+            background-color: #557F50;  /* Button color */
+            color: white; /* Text color */
+            padding: 15px 30px;
+            border-radius: 30px; /* Rounded corners */
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none; /* Make the button unclickable */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for depth */
+        }
+
+        .title {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .img-box {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 0px;
+            border: 25px solid #5D3FD3;
+            border-radius: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .row {
+            margin-left: -100px;
+            margin-right: -100px;
+        }
+
+        /* Styles for the new employee form */
+        .new-user-form {
+            display: none;
+        }
+
+        .new-user-form.active {
+            display: block;
+        }
+
+        .container-form {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 0px;
+            box-shadow: 0 0 0px rgba(0, 0, 0, 0);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            font-family: Helvatica;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .input-field {
+            margin-bottom: 319px;
+        }
+
+        .input-field label {
+            display: block;
+            margin-top:10px;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .input-field input {
+            width: 90%;
+            padding: 7px;
+            padding-right:50px;
+            margin: 0 auto;
+            border-radius: 5px;
+            border: 2px solid #6c63ff;
+            display: block;
+            box-sizing: border-box;
+            outline: none;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #6c63ff;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 60px;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #5852d6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 box">
+                <div class="large-heading">
+                    <i class="fas fa-hospital icon"></i> <!-- Font Awesome icon -->
+                    ATTENDANCE SYSTEM
+                </div>
+                <!-- Live video feed from the webcam -->
+                <img src="{{ url_for('video_feed') }}" class="img-box img-fluid video-box" alt="Video Feed">
+            </div>
+            <div class="col-sm-4 box">
+                <div class = "img-box">
+
+                    <script>
+                        function markAttendance(employeeName, imagePath, faceDetected) {
+                            $.ajax({
+                                url: '/mark_attendance',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    employee_name: employeeName,
+                                    realtime_image_path: imagePath,
+                                    face_detected: faceDetected
+                                }),
+                                success: function(response) {
+                                    if (response.status === 'marked') {
+                                        document.getElementById('marked').style.display = 'block';
+                                    } else if (response.status === 'already_marked') {
+                                        document.getElementById('already_marked').style.display = 'block';
+                                    } else if (response.status === 'no_image') {
+                                        document.getElementById('status-message').innerText = "No Valid Image Found";
+                                    } else {
+                                        document.getElementById('status-message').innerText = "Error: " + response.message;
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    document.getElementById('status-message').innerText = "An error occurred: " + error;
+                                }
+                            });
+                        }
+                        setInterval(markAttendance,1000)
+                    </script>
+
+                    {% if mode == 'active' %}
+                    <div class="mode active" id="active-mode">
+                            <div class="active-centered-button">
+                                <span class="active-rounded-button">ACTIVE</span>
+                            </div>
+                    </div>
+                    {% elif mode == 'new_user' %}
+                    <div class="new-user-form active" id="new-user-form">
+                        <div class="container-form">
+                            <div class="message-container">
+                                <p class="message">NEW EMPLOYEE DETECTED!</p>
+                            </div>
+                            <form action= "{{ url_for('capture_image') }}" method="POST">
+                                <div class="input-field">
+                                    <label for="employee_name">ENTER YOUR FULL NAME :</label>
+                                    <input type="text" id="employee_name" name="employee_name">
+                                </div>
+                                <button type="submit" class="btn" title="Please Look Into The Camera And Smile!!!. Click To Capture Your Image">CAPTURE IMAGE</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% elif mode == 'marked' %}
+                    <div class="mode" id="marked-mode">
+                            <div class="marked-centered-button">
+                                <i class="fa-solid fa-circle-check fa-sm" style="color: #00ff00;font-size: 8rem;margin-bottom: 80%"></i>
+                                <span class="marked-rounded-button">MARKED</span>
+                            </div>
+                    </div>
+                    {% elif mode == 'already_marked' %}
+                    <div class="mode" id="already-marked-mode">
+                            <div class="already-marked-centered-button">
+                                <span class="already-marked-rounded-button">ALREADY MARKED</span>
+                            </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
